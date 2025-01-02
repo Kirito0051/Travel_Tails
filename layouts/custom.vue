@@ -4,14 +4,13 @@
         <Navbar />
 
         <!-- Main Content -->
-        <main class="flex-grow">
-            <slot />
+        <main class="flex-grow pb-[8rem]"> <!-- Add padding-bottom -->
+            <div class="container mx-auto p-4">
+                <slot />
+            </div>
         </main>
+
         <!-- Footer -->
         <Footer />
     </div>
 </template>
-
-<script setup>
-import Footer from '~/components/Footer.vue'
-</script>
