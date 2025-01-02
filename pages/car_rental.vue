@@ -31,9 +31,9 @@
                         <NuxtLink to="/car_rental"
                             class="transition-all duration-300 ease-in-out hover:scale-105 hover:text-xl gradient-text">
                             Car Rentals</NuxtLink>
-                        <NuxtLink to="/contact"
+                        <NuxtLink to="/Connect"
                             class="transition-all duration-300 ease-in-out hover:scale-105 hover:text-xl gradient-text">
-                            Contact
+                            Connect
                         </NuxtLink>
 
                     </div>
@@ -49,7 +49,7 @@
                         <NuxtLink to="/hotels" class="block text-[#4a4947] hover:text-blue-600">Hotels</NuxtLink>
                         <NuxtLink to="/car_rental" class="block text-[#4a4947] hover:text-blue-600">Car Rentals
                         </NuxtLink>
-                        <NuxtLink to="/contact" class="block text-[#4a4947] hover:text-blue-600">Contact</NuxtLink>
+                        <NuxtLink to="/Connect" class="block text-[#4a4947] hover:text-blue-600">Connect</NuxtLink>
                     </div>
                 </div>
             </nav>
