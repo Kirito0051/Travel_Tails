@@ -1,24 +1,41 @@
 <template>
-    <nav class="bg-blue-600 text-white">
+    <nav class=" text-black">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Navigation Links (Left) -->
+            <ul class="hidden md:flex space-x-8 flex-1 justify-end">
+                <li>
+                    <NuxtLink to="/"
+                        class="border-b-2 border-blue-300 pb-1 hover:border-transparent hover:text-blue-300">
+                        Home
+                    </NuxtLink>
+                </li>
+                <li>
+                    <NuxtLink to="/flights"
+                        class="border-b-2 border-blue-300 pb-1 hover:border-transparent hover:text-blue-300">
+                        Flights
+                    </NuxtLink>
+                </li>
+            </ul>
+
             <!-- Logo -->
-            <div class="text-2xl font-bold">
+            <div class="text-3xl font-bold mx-auto w-80 text-center font-sourGummy">
                 <NuxtLink to="/" class="hover:text-blue-300">Travel Explorer</NuxtLink>
             </div>
 
-            <!-- Navigation Links -->
-            <ul class="hidden md:flex space-x-6">
+
+            <!-- Navigation Links (Right) -->
+            <ul class="hidden md:flex space-x-8 flex-1 justify-start">
                 <li>
-                    <NuxtLink to="/" class="hover:text-blue-300">Home</NuxtLink>
+                    <NuxtLink to="/hotels"
+                        class="border-b-2 border-blue-300 pb-1 hover:border-transparent hover:text-blue-300">
+                        Hotels
+                    </NuxtLink>
                 </li>
                 <li>
-                    <NuxtLink to="/flights" class="hover:text-blue-300">Flights</NuxtLink>
-                </li>
-                <li>
-                    <NuxtLink to="/hotels" class="hover:text-blue-300">Hotels</NuxtLink>
-                </li>
-                <li>
-                    <NuxtLink to="/cars" class="hover:text-blue-300">Car Rentals</NuxtLink>
+                    <NuxtLink to="/car_rental"
+                        class="border-b-2 border-blue-300 pb-1 hover:border-transparent hover:text-blue-300">
+                        Car Rentals
+                    </NuxtLink>
                 </li>
             </ul>
 
@@ -43,7 +60,7 @@
                     <NuxtLink to="/hotels" class="block hover:text-blue-300">Hotels</NuxtLink>
                 </li>
                 <li>
-                    <NuxtLink to="/cars" class="block hover:text-blue-300">Car Rentals</NuxtLink>
+                    <NuxtLink to="/car_rental" class="block hover:text-blue-300">Car Rentals</NuxtLink>
                 </li>
             </ul>
         </div>
