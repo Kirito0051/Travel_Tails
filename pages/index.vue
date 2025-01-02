@@ -17,7 +17,7 @@
                     </button>
 
                     <!-- Navbar Links (Visible on larger screens) -->
-                    <div class="hidden md:flex space-x-4 md:space-x-6 mr-4 md:mr-10 font-bob text-base md:text-xl">
+                    <div class="hidden md:flex space-x-4 md:space-x-6 font-bob text-base md:text-xl">
                         <NuxtLink to="/flights"
                             class="transition-all duration-300 ease-in-out hover:scale-105 hover:text-2xl text-[#4a4947]">
                             Flights
@@ -28,10 +28,11 @@
                         </NuxtLink>
                         <NuxtLink to="/car_rental"
                             class="transition-all duration-300 ease-in-out hover:scale-105 hover:text-2xl text-[#4a4947]">
-                            Car Rentals</NuxtLink>
-                        <NuxtLink to="/contact"
+                            Car Rentals
+                        </NuxtLink>
+                        <NuxtLink to="/connect"
                             class="transition-all duration-300 ease-in-out hover:scale-105 hover:text-2xl text-[#4a4947]">
-                            Contact
+                            Connect
                         </NuxtLink>
                     </div>
                 </div>
@@ -47,10 +48,13 @@
                         <NuxtLink to="/hotels" class="block text-[#4a4947] hover:text-blue-600">Hotels</NuxtLink>
                         <NuxtLink to="/car_rental" class="block text-[#4a4947] hover:text-blue-600">Car Rentals
                         </NuxtLink>
-                        <NuxtLink to="/contact" class="block text-[#4a4947] hover:text-blue-600">Contact</NuxtLink>
+                        <NuxtLink to="/connect" class="block text-[#4a4947] hover:text-blue-600">Connect</NuxtLink>
+                        <NuxtLink to="/login" class="block text-[#4a4947] hover:text-blue-600 mt-4">Login</NuxtLink>
+                        <NuxtLink to="/signup" class="block text-[#4a4947] hover:text-blue-600">Sign Up</NuxtLink>
                     </div>
                 </div>
             </nav>
+
             <!-- Hero Content (Title, Subtitle, Button) -->
             <div class="absolute top-1/3 left-5 md:left-10 w-full px-4 md:px-10 text-left">
                 <h1
@@ -74,6 +78,45 @@
                 </path>
             </svg>
         </section>
+        <!-- Popup Modal -->
+        <div id="popup-modal" v-show="isModalOpen"
+            class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
+            <div class="bg-white rounded-lg shadow-lg p-8 max-w-sm w-70 relative">
+                <button @click="closeModal" class="absolute top-2 right-2 text-2xl text-gray-600">✕</button>
+
+                <!-- Modal Content -->
+                <div class="space-y-4">
+                    <!-- Login Form -->
+                    <div>
+                        <form @submit.prevent="redirectToLogin">
+                            <button type="submit"
+                                class="w-60 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition transform duration-300 hover:scale-105">
+                                Login
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Sign Up Form -->
+                    <div>
+                        <form @submit.prevent="redirectToSignUp">
+                            <button type="submit"
+                                class="w-60 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition transform duration-300 hover:scale-105">
+                                Sign Up
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Trigger Button for Popup -->
+        <div class="fixed bottom-6 right-6">
+            <button @click="openModal"
+                class="bg-gray-300  p-4 rounded-full shadow-lg hover:bg-gray-500 transition transform duration-300 hover:scale-105">
+                <img src="/public/images/login_icon.png" alt="login_icon" class="w-6 h-auto">
+            </button>
+        </div>
         <!-- Features Section -->
         <div class="w-full p-4 py-20 flex flex-wrap gap-12 justify-center items-center">
             <!-- Feature Cards -->
@@ -189,39 +232,51 @@
 
 <script>
 export default {
-    mounted() {
-        const hamburgerBtn = document.getElementById('hamburger-btn');
-        const closeBtn = document.getElementById('close-btn');
-        const sidebar = document.getElementById('sidebar');
-        const logo = document.getElementById('logo');
+    data() {
+        return {
+            isModalOpen: false
+        };
+    },
+    methods: {
+        openModal() {
+            this.isModalOpen = true;
+        },
+        closeModal() {
+            this.isModalOpen = false;
+        },
+        redirectToLogin() {
+            this.$router.push('/login');
+        },
+        redirectToSignUp() {
+            this.$router.push('/signup');
+        },
+        mounted() {
+            const hamburgerBtn = document.getElementById("hamburger-btn");
+            const sidebar = document.getElementById("sidebar");
+            const closeBtn = document.getElementById("close-btn");
 
-        // Ensure all elements are available before adding event listeners
-        if (logo && hamburgerBtn && closeBtn && sidebar) {
-            // Logo click toggles sidebar
-            logo.addEventListener('click', () => {
-                sidebar.classList.toggle('-translate-x-full'); // Toggle sidebar visibility
+            // Open sidebar
+            hamburgerBtn.addEventListener("click", () => {
+                sidebar.style.transform = "translateX(0)";
             });
 
-            // Hamburger button opens sidebar
-            hamburgerBtn.addEventListener('click', () => {
-                sidebar.classList.remove('-translate-x-full'); // Show sidebar
+            // Close sidebar when the close button is clicked
+            closeBtn.addEventListener("click", () => {
+                sidebar.style.transform = "translateX(-100%)";
             });
 
-            // Close button hides sidebar
-            closeBtn.addEventListener('click', () => {
-                sidebar.classList.add('-translate-x-full'); // Hide sidebar
-            });
-
-            // Optional: Close sidebar when clicking outside
-            window.addEventListener('click', (e) => {
-                if (!sidebar.contains(e.target) && !hamburgerBtn.contains(e.target) && !logo.contains(e.target)) {
-                    sidebar.classList.add('-translate-x-full'); // Hide sidebar when clicking outside
+            // Close sidebar if click is outside of it
+            document.addEventListener("click", (e) => {
+                if (!hamburgerBtn.contains(e.target) && !sidebar.contains(e.target)) {
+                    sidebar.style.transform = "translateX(-100%)";
                 }
             });
         }
     }
-}
+};
 </script>
+
+
 
 <style scoped>
 @media (max-width: 1375px) {
